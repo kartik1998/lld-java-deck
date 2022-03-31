@@ -43,17 +43,17 @@ class SlidingWindow {
     }
 }
 
-class RateLimiter {
+class SlidingWindowRateLimiter {
     private HashMap<String, SlidingWindow> ipWindowMap = new HashMap<>();
     private int duration = 60; // duration in seconds
     private int maxWindowSize = 10; // max window size
     private TreeMap<String, Long> latestTimeStampMap = new TreeMap<>();
     public int cleanupCount = 100;
 
-    public RateLimiter() {
+    public SlidingWindowRateLimiter() {
     }
 
-    public RateLimiter(int duration, int maxWindowSize) {
+    public SlidingWindowRateLimiter(int duration, int maxWindowSize) {
         this.duration = duration;
         this.maxWindowSize = maxWindowSize;
     }
@@ -89,7 +89,7 @@ class RateLimiter {
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        RateLimiter rateLimiter = new RateLimiter();
+        SlidingWindowRateLimiter rateLimiter = new SlidingWindowRateLimiter();
         for (int i = 0; i < 15; i++) {
             System.out.println(rateLimiter.grantAccess("10.0.0.1"));
         }
