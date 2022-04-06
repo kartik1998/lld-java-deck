@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 class TokenBucket {
     private final long maxBucketSize;
-    private final long refillRate;
+    private final double refillRate;
     private double currentBucketSize;
     private long lastRefillTimestamp;
 
-    public TokenBucket(long maxBucketSize, long refillRate) {
+    public TokenBucket(long maxBucketSize, double refillRate) {
         this.maxBucketSize = maxBucketSize;
         this.refillRate = refillRate;
         this.currentBucketSize = maxBucketSize;
@@ -34,7 +34,7 @@ class TokenBucket {
 
 class TokenBucketRateLimiter {
     private HashMap<String, TokenBucket> ipWindowMap = new HashMap<>();
-    private int refillRate = 4;
+    private double refillRate = 0.833;
     private int maxBucketSize = 10;
 
     public synchronized boolean grantAccess(String ip) {
@@ -57,8 +57,8 @@ public class Main {
         for (int i = 0; i < 15; i++) {
             System.out.println(rateLimiter.grantAccess("10.0.0.1"));
         }
-        System.out.println("initiating thread sleep");
-        Thread.sleep(1000);
+        System.out.println("initiating thread sleep for 12 seconds");
+        Thread.sleep(12000);
         System.out.println(rateLimiter.grantAccess("10.0.0.1"));
         System.out.println(rateLimiter.grantAccess("10.0.0.1"));
         System.out.println(rateLimiter.grantAccess("10.0.0.1"));
