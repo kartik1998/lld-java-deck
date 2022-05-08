@@ -18,7 +18,7 @@ public class TextEditor {
     private Selection selection = null;
 
     public void append(String str) {
-//        if (selection != null) throw new Error("cannot append if there is a selection");
+        this.delete(); // delete any selection first
         if (cursor == 0) {
             text = str + text;
         } else if (cursor == str.length()) {
@@ -41,6 +41,7 @@ public class TextEditor {
     }
 
     public void backspace() {
+        this.delete(); // delete all selections first
         if (selection != null) throw new Error("cannot backspace if there is a selection");
         if (cursor == 0) return;
         if (cursor == text.length()) {
@@ -58,6 +59,20 @@ public class TextEditor {
 
     public void unselect() {
         this.selection = null;
+    }
+
+    public void delete() {
+        if (this.selection != null) {
+            int start = selection.start;
+            int end = selection.end;
+            String suffix = "";
+            String prefix = "";
+            if (start > 0) prefix = text.substring(0, start);
+            if (end < text.length() - 1) suffix = text.substring(end + 1);
+            text = prefix + suffix;
+            cursor = start;
+            this.unselect();
+        }
     }
 
     public String copy() {
@@ -90,8 +105,9 @@ public class TextEditor {
     public String toString() {
         return "{" +
                 "text='" + text + '\'' +
-                ", textLength=" + text.length() +
+                ", text-length=" + text.length() +
                 ", cursor=" + cursor +
+                ", clip-board=" + clipBoard +
                 '}';
     }
 }
