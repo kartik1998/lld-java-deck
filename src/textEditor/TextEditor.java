@@ -18,7 +18,7 @@ public class TextEditor {
     private Selection selection = null;
 
     public void append(String str) {
-        this.delete(); // delete any selection first
+        this.delete(); // delete selection first if any
         if (cursor == 0) {
             text = str + text;
         } else if (cursor == str.length()) {
@@ -41,8 +41,10 @@ public class TextEditor {
     }
 
     public void backspace() {
-        this.delete(); // delete all selections first
-        if (selection != null) throw new Error("cannot backspace if there is a selection");
+        if (selection != null) {
+            this.delete();
+            return;
+        }
         if (cursor == 0) return;
         if (cursor == text.length()) {
             text = text.substring(0, cursor - 1);
@@ -78,6 +80,7 @@ public class TextEditor {
     public String copy() {
         if (this.selection != null) {
             this.clipBoard = selection.text;
+            this.unselect();
             return clipBoard;
         } else {
             System.out.println("no text selected");

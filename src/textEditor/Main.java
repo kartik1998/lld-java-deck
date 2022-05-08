@@ -3,6 +3,7 @@ package textEditor;
 // In an editor's context you should be clear about the cursor and text
 // For text "HELLO, WORLD", cursor positions (marked in braces) will look like:
 // "{0}H{1}E{2}L{3}L{4}O{5},{6}(space){7}W{8}O{9}R{10}L{11}D{12}"
+// TODO: implement undo and redo
 
 public class Main {
     public static void main(String[] args) {
@@ -15,6 +16,9 @@ public class Main {
         editor.backspace();
         editor.backspace();
         editor.append("NOW");
+        editor.select(1, 5);
+        editor.copy();
+        editor.paste();
         editor.print();
     }
 }
