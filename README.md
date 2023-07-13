@@ -1,4 +1,17 @@
-### Low level design reference (Java)
+# Low level design reference (Java)
+
+Github , LLD Primer
+https://lnkd.in/dtEY-4Av
+
+Design Patterns Playlist
+https://lnkd.in/d36y4_pz
+
+Best Github Article 
+https://lnkd.in/dfNiqcBx
+
+Learn Language wise design Patterns
+https://lnkd.in/dT86MKHE
+
 
 # Solutions
 
