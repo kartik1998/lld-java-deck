@@ -1,15 +1,13 @@
 package hashmap;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
 
 /**
  * Implementation -> https://www.youtube.com/watch?v=AsAymWn7D40
  * defaultSize -> 16 (Always as a power of 2 i.e. 2^n to ensure better collision management)
  * loadFactor
  */
-public class HashMapImpl<K, V> implements IHashMap<K, V> {
+public class HashMapImpl<K, V> implements IMap<K, V> {
     /**
      * set initial size as 16
      */
