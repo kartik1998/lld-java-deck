@@ -1,5 +1,6 @@
 package hashmap;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -39,6 +40,15 @@ public class HashMapImpl<K, V> implements IHashMap<K, V> {
             this.value = value;
             this.next = null;
         }
+
+        @Override
+        public String toString() {
+            return "Entry{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", next=" + next +
+                    '}';
+        }
     }
 
 
@@ -62,12 +72,12 @@ public class HashMapImpl<K, V> implements IHashMap<K, V> {
         } else {
             Entry temp = node;
             while (temp != null) {
-                if(temp.key.equals(key)) {
+                if (temp.key.equals(key)) {
                     temp.value = val;
                     break;
                 }
 
-                if(temp.next == null) {
+                if (temp.next == null) {
                     temp.next = new Entry<K, V>(key, val);
                     break;
                 }
@@ -81,8 +91,8 @@ public class HashMapImpl<K, V> implements IHashMap<K, V> {
         int hashCode = key.hashCode() % hashTable.length;
         Entry node = hashTable[hashCode];
         Entry temp = node;
-        while(temp != null) {
-            if(temp.key.equals(key)) {
+        while (temp != null) {
+            if (temp.key.equals(key)) {
                 return (V) temp.value;
             }
             temp = temp.next;
@@ -106,5 +116,13 @@ public class HashMapImpl<K, V> implements IHashMap<K, V> {
         n |= n >>> 8;
         n |= n >>> 16;
         return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+    }
+
+    @Override
+    public String toString() {
+        return "HashMapImpl{" +
+                "hashTable=" + Arrays.toString(hashTable) +
+                ", tableLength=" + tableLength +
+                '}';
     }
 }
