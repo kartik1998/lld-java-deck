@@ -1,4 +1,4 @@
-package ATM;
+package atm_design;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package hashmap;
+package hashmap_design;
 
 /**
  * Implementation -> https://www.youtube.com/watch?v=AsAymWn7D40

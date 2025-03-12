@@ -1,4 +1,4 @@
-package hashmap;
+package hashmap_design;
 
 import java.util.Arrays;
 

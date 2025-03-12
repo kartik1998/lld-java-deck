@@ -1,4 +1,4 @@
-package ATM;
+package atm_design;
 
 public class DispenseFactory {
     public static DispenseChain getRegularDispenseChain() {
