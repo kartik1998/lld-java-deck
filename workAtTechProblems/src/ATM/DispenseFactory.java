@@ -9,7 +9,7 @@ public class DispenseFactory {
 
         twoThousand.setNextDispenseChain(fiveHundred);
         fiveHundred.setNextDispenseChain(twoHundred);
-        twoThousand.setNextDispenseChain(oneHundred);
+        fiveHundred.setNextDispenseChain(oneHundred);
         return twoThousand;
     }
 }

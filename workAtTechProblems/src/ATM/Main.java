@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        DispenseChain chain = DispenseFactory.getRegularDispenseChain();
+        ATM atm = new ATM();
 
-        List<Integer> retval = chain.dispenseCurrency(2100);
+        List<Integer> retval = atm.withdraw(1010);
         System.out.println(retval);
     }
 }
