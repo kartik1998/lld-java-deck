@@ -3,6 +3,7 @@ package stripe.fraud_detection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,10 +16,16 @@ public class FraudDetectionHandler {
         public final int mccCode;
         List<String> transactions = new ArrayList<>();
         boolean isFraudulent = false;
+        private Set<String> disputedChargeIds = new HashSet<>();
 
         Account(String id, int mccCode) {
             this.id = id;
             this.mccCode = mccCode;
+        }
+
+        public void dispute(String chargeId) {
+            disputedChargeIds.add(chargeId);
+            this.isFraudulent = false; // mark as non fraudulent again
         }
 
         public boolean isFraudulent() {
@@ -30,7 +37,15 @@ public class FraudDetectionHandler {
 
             int fraudCount = 0;
             for (String transaction : transactions) {
-                String code = transaction.split(",")[4];
+                String arr[] = transaction.split(",");
+                String code = arr[4];
+                String chargeId = arr[1];
+
+                // if disputed skip compute
+                if (disputedChargeIds.contains(chargeId)) {
+                    continue;
+                }
+
                 if (fraudCodes.contains(code.toLowerCase())) {
                     fraudCount++;
                 }
@@ -49,6 +64,7 @@ public class FraudDetectionHandler {
     private final Map<String, Integer> accountToMccMap;
     private final int minimumTransactions;
     private final Map<String, Account> accountMap = new HashMap<>();
+    private final Map<String, Account> transactionToAccountMap = new HashMap<>();
 
     public FraudDetectionHandler(Set<String> validCodes,
                                  Set<String> fraudCodes,
@@ -65,11 +81,19 @@ public class FraudDetectionHandler {
         }
     }
 
+    public void dispute(String chargeId) {
+        if (transactionToAccountMap.containsKey(chargeId)) {
+            transactionToAccountMap.get(chargeId).dispute(chargeId);
+        }
+    }
+
     public void recordTransactions(List<String> transactions) {
         for (String transaction : transactions) {
             String arr[] = transaction.split(",");
             String account = arr[2];
+            String chargeId = arr[1];
             accountMap.get(account).transactions.add(transaction);
+            transactionToAccountMap.put(chargeId, accountMap.get(account));
         }
     }
 

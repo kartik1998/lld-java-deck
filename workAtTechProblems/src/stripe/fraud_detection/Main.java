@@ -23,6 +23,9 @@ public class Main {
                 "CHARGE,ch_5,acct_1,50,stolen_card"
         ));
 
+        handler.dispute("ch_2");
+        handler.dispute("ch_3");
+        handler.dispute("ch_4");
         System.out.println(handler.getFraudAccounts());
     }
 }
