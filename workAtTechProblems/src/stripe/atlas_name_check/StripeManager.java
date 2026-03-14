@@ -9,6 +9,10 @@ public class StripeManager {
 
     public boolean registerAttempt(int accountId, String name) {
         String key = normalizer.normalize(name);
+        if(key == null) {
+            System.out.println(accountId + " | " + "Name Not Available");
+            return false;
+        }
         if(!map.containsKey(key)) {
             map.put(key, accountId);
             System.out.println(accountId + " | " + "Name Available");
