@@ -36,7 +36,7 @@ public class StripeNormalizer {
                 continue;
             }
             if (!s.isEmpty() && !s.equals(" ")) {
-                res += s;
+                res += s + " ";
             }
         }
         return res.trim();
