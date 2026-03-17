@@ -8,8 +8,10 @@ public class Main {
 //        System.out.println(paymentCardValidator.validateAndFetch("5482334509943"));
 
 
-        System.out.println(paymentCardValidator.fetchRedactedCards("4242424242424*42"));
-        System.out.println(paymentCardValidator.fetchRedactedCards("3*8282246310005"));
-        System.out.println(paymentCardValidator.fetchRedactedCards("**42424242424242"));
+//        System.out.println(paymentCardValidator.fetchRedactedCards("4242424242424*42"));
+//        System.out.println(paymentCardValidator.fetchRedactedCards("3*8282246310005"));
+//        System.out.println(paymentCardValidator.fetchRedactedCards("**42424242424242"));
+
+        paymentCardValidator.handleCorruptedCard("4344555566660004?");
     }
 }
