@@ -2,8 +2,10 @@ package multi_threading;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class BoundedBufferQueueProblem {
+
     static class BoundedQueue<T> {
         private Queue<T> q = new LinkedList<>();
         private int capacity;
